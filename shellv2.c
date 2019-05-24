@@ -321,7 +321,7 @@ char* read_cmd(char* prompt, FILE* fp){
 //whether the command is intenal or not
 int isInternal(char* arglist[]){
 		
-		if((strcmp(arglist[0],"cd") && strcmp(arglist[0],"exit") && strcmp(arglist[0],"pwd") && strcmp(arglist[0],"help")) == 0){
+		if((strcmp(arglist[0],"cd") && strcmp(arglist[0],"exit") && strcmp(arglist[0],"pwd") && strcmp(arglist[0],"help") && strcmp(arglist[0], "kill")) == 0){
 			//printf("It is Internal Command\n");
 			return 1;
 		}
@@ -351,5 +351,15 @@ void executeInternal(char* arglist[], char* prompt){
 		if(strcmp(arglist[0], "help") == 0)
 		{
 			printf("cd\nexit\nhelp\njobs\nkill\n");
+		}
+		if(strcmp(arglist[0], "kill") == 0)
+		{
+			int signum;
+			if(arglist[1][2] == '\0')
+				signum = arglist[1][1] - '0';
+			else
+				signum = (arglist[1][1] - '0') * 10 + (arglist[1][2] - '0');
+			kill(atoi(arglist[2]), signum);
+			
 		}
 }
