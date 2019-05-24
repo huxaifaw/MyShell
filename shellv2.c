@@ -348,5 +348,8 @@ void executeInternal(char* arglist[], char* prompt){
    			if (getcwd(cwd, sizeof(cwd)) != NULL)
 			printf("%s\n",cwd);
 		}
-	
+		if(strcmp(arglist[0], "help") == 0)
+		{
+			printf("cd\nexit\nhelp\njobs\nkill\n");
+		}
 }
